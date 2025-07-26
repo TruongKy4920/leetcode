@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+//Ý tưởng là lấy prefix lớn nhất là phần tử string đầu tiên, so sánh nó với phần tử
+//kế tiếp để lấy prefix chung lớn nhất, rồi lấy chính prefix chung lớn nhất đó so với
+//string kế tiếp
+
+string prefix;
+
+string get_prefix(string a, string b){
+    string prefix;
+    if(a>b){
+        for(int i=0;i<b.length();i++){
+            if(a[i]==b[i]) prefix+=a[i];
+            else break;
+        }
+    }
+    else {
+        for(int i=0;i<a.length();i++){
+            if(a[i]==b[i]) prefix+=a[i];
+            else break;
+        }
+    }
+    return prefix;
+}
+
+string longestCommonPrefix(vector<string>& strs) {
+       prefix=strs[0];
+       for(int i=1;i<strs.size();i++){
+           prefix=get_prefix(prefix,strs[i]);
+       }
+       return prefix;
+    }
+int main()
+{
+    vector<string> strs = {"flamer","flame","flay"};
+    string longest = longestCommonPrefix(strs);
+    cout<<longest;
+
+    return 0;
+}
